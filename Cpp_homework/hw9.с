@@ -13,11 +13,33 @@ Code, Compile, Run and Debug online from anywhere in world.
 void bubble_sort(int *, int);
 void order(int *, int *);
 void qsortRecursive(int *, int);
-const int N = 50; // Размер массива
+const int N = 30; // Р Р°Р·РјРµСЂ РјР°СЃСЃРёРІР°
 
 int main()
 {
     int array[N];
+
+    printf ("1) РЎРѕСЂС‚РёСЂРѕРІРєР° РјРµС‚РѕРґРѕРј РїСѓР·С‹СЂСЊРєР°. \n");
+    for(int i = 0; i < N; i++)
+        array[i]= -100 + rand() % 200;
+
+    printf ("Original array: ");
+    for (int i = 0; i < N; i++)
+    printf ("%d ", array[i]);
+    printf ("\n");
+
+    clock_t begin1 = clock();
+    bubble_sort(array, N);
+    clock_t end1 = clock();
+    double time_spent1 = (double)(end1 - begin1) / CLOCKS_PER_SEC * 100000;
+
+    printf ("Sorted array:  ");
+    for (int i = 0; i < N; i++)
+    printf ("%d ", array[i]);
+    printf ("\n");
+    printf("Time bubble_sort() spent: %f \n", time_spent1);
+
+    printf ("2) Р‘С‹СЃС‚СЂР°СЏ СЃРѕСЂС‚РёСЂРѕРІРєР°. \n");
 
     for(int i = 0; i < N; i++)
         array[i]= -100 + rand() % 200;
@@ -27,17 +49,18 @@ int main()
     printf ("%d ", array[i]);
     printf ("\n");
 
-    clock_t begin = clock();
-    bubble_sort(array, N);
-    clock_t end = clock();
-    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC * 100000;
+    clock_t begin2 = clock();
+    qsortRecursive(array, N);
+    clock_t end2 = clock();
+    double time_spent2 = (double)(end2 - begin2) / CLOCKS_PER_SEC * 100000;
 
     printf ("Sorted array:   ");
     for (int i = 0; i < N; i++)
     printf ("%d ", array[i]);
     printf ("\n");
-    printf("time spent: %f \n", time_spent);
+    printf("Time qsortRecursive() spent: %f \n", time_spent2);
     return 0;
+
 }
 
 void bubble_sort(int *ptr, int n) {
@@ -57,26 +80,26 @@ void order(int *numb1, int *numb2) {
 }
 
 void qsortRecursive(int *array, int N) {
-    //Указатели в начало и в конец массива
+    //РЈРєР°Р·Р°С‚РµР»Рё РІ РЅР°С‡Р°Р»Рѕ Рё РІ РєРѕРЅРµС† РјР°СЃСЃРёРІР°
     int i = 0;
     int j = N - 1;
 
-    //Центральный элемент массива
+    //Р¦РµРЅС‚СЂР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ РјР°СЃСЃРёРІР°
     int mid = array[N / 2];
 
-    //Делим массив
+    //Р”РµР»РёРј РјР°СЃСЃРёРІ
     do {
-        //Пробегаем элементы, ищем те, которые нужно перекинуть в другую часть
-        //В левой части массива пропускаем(оставляем на месте) элементы, которые меньше центрального
+        //РџСЂРѕР±РµРіР°РµРј СЌР»РµРјРµРЅС‚С‹, РёС‰РµРј С‚Рµ, РєРѕС‚РѕСЂС‹Рµ РЅСѓР¶РЅРѕ РїРµСЂРµРєРёРЅСѓС‚СЊ РІ РґСЂСѓРіСѓСЋ С‡Р°СЃС‚СЊ
+        //Р’ Р»РµРІРѕР№ С‡Р°СЃС‚Рё РјР°СЃСЃРёРІР° РїСЂРѕРїСѓСЃРєР°РµРј(РѕСЃС‚Р°РІР»СЏРµРј РЅР° РјРµСЃС‚Рµ) СЌР»РµРјРµРЅС‚С‹, РєРѕС‚РѕСЂС‹Рµ РјРµРЅСЊС€Рµ С†РµРЅС‚СЂР°Р»СЊРЅРѕРіРѕ
         while(array[i] < mid) {
             i++;
         }
-        //В правой части пропускаем элементы, которые больше центрального
+        //Р’ РїСЂР°РІРѕР№ С‡Р°СЃС‚Рё РїСЂРѕРїСѓСЃРєР°РµРј СЌР»РµРјРµРЅС‚С‹, РєРѕС‚РѕСЂС‹Рµ Р±РѕР»СЊС€Рµ С†РµРЅС‚СЂР°Р»СЊРЅРѕРіРѕ
         while(array[j] > mid) {
             j--;
         }
 
-        //Меняем элементы местами
+        //РњРµРЅСЏРµРј СЌР»РµРјРµРЅС‚С‹ РјРµСЃС‚Р°РјРё
         if (i <= j) {
             int tmp = array[i];
             array[i] = array[j];
@@ -88,13 +111,13 @@ void qsortRecursive(int *array, int N) {
     } while (i <= j);
 
 
-    //Рекурсивные вызовы, если осталось, что сортировать
+    //Р РµРєСѓСЂСЃРёРІРЅС‹Рµ РІС‹Р·РѕРІС‹, РµСЃР»Рё РѕСЃС‚Р°Р»РѕСЃСЊ, С‡С‚Рѕ СЃРѕСЂС‚РёСЂРѕРІР°С‚СЊ
     if(j > 0) {
-        //"Левый кусок"
+        //"Р›РµРІС‹Р№ РєСѓСЃРѕРє"
         qsortRecursive(array, j + 1);
     }
     if (i < N) {
-        //"Првый кусок"
+        //"РџСЂР°РІС‹Р№ РєСѓСЃРѕРє"
         qsortRecursive(&array[i], N - i);
     }
 }
