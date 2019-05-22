@@ -1,0 +1,100 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby,
+C#, VB, Perl, Swift, Prolog, Javascript, Pascal, HTML, CSS, JS
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void bubble_sort(int *, int);
+void order(int *, int *);
+void qsortRecursive(int *, int);
+const int N = 50; // Размер массива
+
+int main()
+{
+    int array[N];
+
+    for(int i = 0; i < N; i++)
+        array[i]= -100 + rand() % 200;
+
+    printf ("Original array: ");
+    for (int i = 0; i < N; i++)
+    printf ("%d ", array[i]);
+    printf ("\n");
+
+    clock_t begin = clock();
+    bubble_sort(array, N);
+    clock_t end = clock();
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC * 100000;
+
+    printf ("Sorted array:   ");
+    for (int i = 0; i < N; i++)
+    printf ("%d ", array[i]);
+    printf ("\n");
+    printf("time spent: %f \n", time_spent);
+    return 0;
+}
+
+void bubble_sort(int *ptr, int n) {
+    int i, j;
+    for (i = 0; i < n - 1; i++) {
+        for (j = i + 1; j < n; j++)
+        order(ptr + i, ptr + j);
+    }
+}
+
+void order(int *numb1, int *numb2) {
+    if (*numb1 > *numb2) {
+        int temp = *numb1;
+        *numb1 = *numb2;
+        *numb2 = temp;
+    }
+}
+
+void qsortRecursive(int *array, int N) {
+    //Указатели в начало и в конец массива
+    int i = 0;
+    int j = N - 1;
+
+    //Центральный элемент массива
+    int mid = array[N / 2];
+
+    //Делим массив
+    do {
+        //Пробегаем элементы, ищем те, которые нужно перекинуть в другую часть
+        //В левой части массива пропускаем(оставляем на месте) элементы, которые меньше центрального
+        while(array[i] < mid) {
+            i++;
+        }
+        //В правой части пропускаем элементы, которые больше центрального
+        while(array[j] > mid) {
+            j--;
+        }
+
+        //Меняем элементы местами
+        if (i <= j) {
+            int tmp = array[i];
+            array[i] = array[j];
+            array[j] = tmp;
+
+            i++;
+            j--;
+        }
+    } while (i <= j);
+
+
+    //Рекурсивные вызовы, если осталось, что сортировать
+    if(j > 0) {
+        //"Левый кусок"
+        qsortRecursive(array, j + 1);
+    }
+    if (i < N) {
+        //"Првый кусок"
+        qsortRecursive(&array[i], N - i);
+    }
+}
