@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+class Numbers {
+	private:
+	int numb_1;
+	int numb_2;
+	int result;
+
+	public:
+	Numbers() : numb_1(0), numb_2(0), result(0) {} // Конструктор 1, инициализация по умолчанию
+	Numbers(int n1, int n2) : numb_1(n1), numb_2(n2) {} // Конструктор 2, инициализация аргументов
+
+	void get_number() {
+		cout << "Введите число 2: " << numb_2 << endl; cin >> numb_2;
+	}
+
+	void show_result() {
+		cout << "numb_1 + numb_2 = " << result << endl;
+}
+
+	
+	void calculate(Numbers, Numbers); // Прототип функции
+};
+
+
+void Numbers::calculate(Numbers.num1, Numbers.num2) {
+
+	result = Numbers.num1 + Numbers.num2;
+
+}
+
+int main() {
+
+	Numbers numb1(5); // число 1
+	Numbers numb2, numb3;
+	numb2.get_number(); // число 2
+
+	numb3.calculate(numb1, numb2); //(передача числа 1 и числа 2 в функцию)
+	numb3.show_result();
+	
+	return 0;
+
+}
