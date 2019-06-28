@@ -1,8 +1,10 @@
 #include "game.h"
 
+// ------------------- Функция вывода правил игры ---------------------------
+
 void Game::instructions()
 {
-    cout << "Welcome to the ultimate man-machine showdown: Tic-Tac-Toe.\n";
+    cout << "Добро пожаловать в игру крестики-нолики! \n";
 
     cout << "Make your move known by entering a number, 0 - 8.  The number\n";
     cout << "corresponds to the desired board position, as illustrated:\n\n";
@@ -15,6 +17,8 @@ void Game::instructions()
 
     cout << "Prepare yourself, human.  The battle is about to begin.\n\n";
 }
+
+// ---------------------------------------------------------------------------
 
 char Game::askYesNo()
 {
@@ -123,11 +127,8 @@ int Game::humanMove()
     return move;
 }
 
-int Game::computerMove()
+int Game::computerMove(char computer)
 {
-    char human = humanPiece();
-    char computer = opponent(human);
-
     unsigned int move = 0;
     bool found = false;
 
@@ -136,11 +137,11 @@ int Game::computerMove()
     {
         if (isLegal(move))
         {
-			//try move
+            //try move
             board[move] = computer;
             //test for winner
             found = winner() == computer;
-			//undo move
+            //undo move
             board[move] = EMPTY;
         }
 
@@ -160,12 +161,12 @@ int Game::computerMove()
         {
             if (isLegal(move))
             {
-				//try move
-				board[move] = human;
-				//test for winner
+                //try move
+                board[move] = human;
+                //test for winner
                 found = winner() == human;
-			    //undo move
-				board[move] = EMPTY;
+                //undo move
+                board[move] = EMPTY;
             }
 
             if (!found)
@@ -196,5 +197,29 @@ int Game::computerMove()
     }
 
     cout << "I shall take square number " << move << endl;
-	return move;
+    return move;
+}
+
+void Game::announceWinner(char winner, char computer, char human)
+{
+    if (winner == computer)
+    {
+        cout << winner << "'s won!\n";
+        cout << "As I predicted, human, I am triumphant once more -- proof\n";
+        cout << "that computers are superior to humans in all regards.\n";
+    }
+
+    else if (winner == human)
+    {
+        cout << winner << "'s won!\n";
+        cout << "No, no!  It cannot be!  Somehow you tricked me, human.\n";
+        cout << "But never again!  I, the computer, so swear it!\n";
+    }
+
+    else
+    {
+        cout << "It's a tie.\n";
+        cout << "You were most lucky, human, and somehow managed to tie me.\n";
+        cout << "Celebrate... for this is the best you will ever achieve.\n";
+    }
 }

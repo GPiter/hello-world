@@ -38,7 +38,8 @@ public:
     char winner();
     bool isLegal(int move);
     int humanMove();
-    int computerMove();
+    int computerMove(char computer);
+    void announceWinner(char winner, char computer, char human);
 };
 
 #endif // GAME_H
