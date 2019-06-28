@@ -6,11 +6,15 @@
 #include <vector>
 #include <algorithm>
 
-using namespace std;
-
 // Константы, описывающее поле
 const int NUM_SQUARES = 9;
 const char EMPTY = ' ';
+const char X = 'X';
+const char O = 'O';
+const char TIE = 'T';
+const char NO_ONE = 'N';
+
+using namespace std;
 
 class Game
 {
@@ -21,8 +25,8 @@ public:
     int number;
     int move;
 
-    Game() : board(NUM_SQUARES, EMPTY) { }  // Конструктор без аргументов
-    Game(char p) : piece(p) { }
+    Game() : board(NUM_SQUARES, EMPTY) { }      // Конструктор без аргументов
+    Game(char p, int m) : piece(p), move(m) { }     // Конструктор с аргументами
 
 // Прототипы функций
     void instructions();
@@ -31,7 +35,10 @@ public:
     void displayBoard();
     char humanPiece();
     char opponent(char piece);
-
+    char winner();
+    bool isLegal(int move);
+    int humanMove();
+    int computerMove();
 };
 
 #endif // GAME_H
