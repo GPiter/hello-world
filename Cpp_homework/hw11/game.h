@@ -20,6 +20,7 @@ class Game
 {
 public:
     vector<char> board;
+    int mode;
     char response;
     char piece;
     int number;
@@ -30,16 +31,20 @@ public:
 
 // Прототипы функций
     void instructions();
+    int chooseMode();
     char askYesNo();
     int askNumber();
     void displayBoard();
     char humanPiece();
     char opponent(char piece);
     char winner();
+    char player2winner();
     bool isLegal(int move);
     int humanMove();
     int computerMove(char computer);
+    int player2Move();
     void announceWinner(char winner, char computer, char human);
+    void showPlayersWinner(char winner, char player2, char human);
 };
 
 #endif // GAME_H

@@ -4,8 +4,8 @@
 
 void Game::instructions()
 {
-    cout << "Добро пожаловать в игру крестики-нолики! \n";
-
+//    cout << "Добро пожаловать в игру крестики-нолики! \n";
+    cout << "Welcome, human!\n";
     cout << "Make your move known by entering a number, 0 - 8.  The number\n";
     cout << "corresponds to the desired board position, as illustrated:\n\n";
 
@@ -19,6 +19,23 @@ void Game::instructions()
 }
 
 // ---------------------------------------------------------------------------
+
+int Game::chooseMode()
+{
+    cout << "Choose mode, that you wanna play:\n";
+    cout << "1. With PC\n";
+    cout << "2. With 2 Player\n";
+
+    do
+    {
+        cout << "> ";
+        cin >> mode;
+    }
+
+    while(mode > 2 || mode < 1);
+
+    return mode;
+}
 
 char Game::askYesNo()
 {
@@ -110,6 +127,16 @@ char Game::winner()
     return NO_ONE;
 }
 
+char Game::player2winner()
+{
+    // since nobody has won, check for a tie (no empty squares left)
+    if (count(board.begin(), board.end(), EMPTY) == 0)
+        return TIE;
+
+    // since nobody has won and it isn't a tie, the game ain't over
+    return NO_ONE;
+}
+
 inline bool Game::isLegal(int move)
 {
     return (board[move] == EMPTY);
@@ -117,6 +144,19 @@ inline bool Game::isLegal(int move)
 
 int Game::humanMove()
 {
+    int move = askNumber();
+    while (!isLegal(move))
+    {
+        cout << "\nThat square is already occupied, foolish human.\n";
+        move = askNumber();
+    }
+    cout << "Fine...\n";
+    return move;
+}
+
+int Game::player2Move()
+{
+    cout << "Player 2 moved.\n";
     int move = askNumber();
     while (!isLegal(move))
     {
@@ -203,6 +243,30 @@ int Game::computerMove(char computer)
 void Game::announceWinner(char winner, char computer, char human)
 {
     if (winner == computer)
+    {
+        cout << winner << "'s won!\n";
+        cout << "As I predicted, human, I am triumphant once more -- proof\n";
+        cout << "that computers are superior to humans in all regards.\n";
+    }
+
+    else if (winner == human)
+    {
+        cout << winner << "'s won!\n";
+        cout << "No, no!  It cannot be!  Somehow you tricked me, human.\n";
+        cout << "But never again!  I, the computer, so swear it!\n";
+    }
+
+    else
+    {
+        cout << "It's a tie.\n";
+        cout << "You were most lucky, human, and somehow managed to tie me.\n";
+        cout << "Celebrate... for this is the best you will ever achieve.\n";
+    }
+}
+
+void Game::showPlayersWinner(char winner, char player2, char human)
+{
+    if (winner == player2)
     {
         cout << winner << "'s won!\n";
         cout << "As I predicted, human, I am triumphant once more -- proof\n";
