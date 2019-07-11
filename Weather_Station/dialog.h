@@ -28,14 +28,12 @@ private:
     Ui::Dialog *ui;
 
     QSerialPort *arduino;
-    static const quint16 arduino_uno_vendor_id = 6790;
-    static const quint16 arduino_uno_product_id = 29987;
+    static const quint16 arduino_vendor_id = 6790;
+    static const quint16 arduino_product_id = 29987;
     QByteArray serialData;
 
     QString parsed_temperature;
     QString parsed_humidity;
-
-    double temperature_value;
 };
 
 #endif // DIALOG_H

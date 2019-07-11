@@ -2,7 +2,7 @@
 #include "ui_dialog.h"
 #include <QSerialPort>
 #include <QSerialPortInfo>
-#include <string>
+#include <String>
 #include <QDebug>
 #include <QMessageBox>
 
@@ -18,51 +18,54 @@ Dialog::Dialog(QWidget *parent) :
     parsed_humidity = "";
 
 
-    /* ------------------------------------------------------------------------------------
-     *  Тестовый код, выводит описание всех портов, vendor id и product id.
+    /* --------------------- Вывод информации о доступных портах -----------------------------
+     *
+     *  Тестовый код, выводит описание всех доступных портов, vendor id и product id.
      *  Используется для определения параметров порта для настройки конткретной платы Arduino.
      */
 
-    qDebug() << "Number of ports: " << QSerialPortInfo::availablePorts().length() << "\n";
+    qDebug() << "Число портов: " << QSerialPortInfo::availablePorts().length() << "\n";
     foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()){
-    qDebug() << "Description: " << serialPortInfo.description() << "\n";
-    qDebug() << "Has vendor id?: " << serialPortInfo.hasVendorIdentifier() << "\n";
+    qDebug() << "Описание: " << serialPortInfo.description() << "\n";
+    qDebug() << "Наличие vendor id?: " << serialPortInfo.hasVendorIdentifier() << "\n";
     qDebug() << "Vendor ID: " << serialPortInfo.vendorIdentifier() << "\n";
-    qDebug() << "Has product id?: " << serialPortInfo.hasProductIdentifier() << "\n";
+    qDebug() << "Наличие product id?: " << serialPortInfo.hasProductIdentifier() << "\n";
     qDebug() << "Product ID: " << serialPortInfo.productIdentifier() << "\n";
     }
 
     /*--------------------------------------------------------------------------------------*/
 
-    /*
-     *   Identify the port the arduino uno is on.
-     */
+
+    // ------------------- Определение порта, к которому подключен Arduino ------------------
+
     bool arduino_is_available = false;
-    QString arduino_uno_port_name;
-    //
-    //  For each available serial port
+    QString arduino_port_name;
+
+    //  Для каждого доступного serial port
     foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
     {
-        //  check if the serialport has both a product identifier and a vendor identifier
+        //  Проверка, имеет ли serialport данные product identifier и vendor identifier
         if(serialPortInfo.hasProductIdentifier() && serialPortInfo.hasVendorIdentifier())
         {
-            //  check if the product ID and the vendor ID match those of the arduino uno
-            if((serialPortInfo.productIdentifier() == arduino_uno_product_id)
-                    && (serialPortInfo.vendorIdentifier() == arduino_uno_vendor_id))
+            //  Проверка, если product ID и vendor ID совпадают с данными Arduino
+            if((serialPortInfo.productIdentifier() == arduino_product_id)
+                    && (serialPortInfo.vendorIdentifier() == arduino_vendor_id))
             {
-                arduino_is_available = true; //    arduino uno is available on this port
-                arduino_uno_port_name = serialPortInfo.portName();
+                arduino_is_available = true;    // Флаг - Arduino доступно по данному порту
+                arduino_port_name = serialPortInfo.portName();
             }
         }
     }
 
-    /*
-     *  Open and configure the arduino port if available
-     */
+    // ----------------------------------------------------------------------------------------
+
+
+    // ------------------------- Открытие и конфигурация Arduino порта ------------------------
+
     if(arduino_is_available)
     {
-        qDebug() << "Found the arduino port...\n";
-        arduino->setPortName(arduino_uno_port_name);
+        qDebug() << "Определение Arduino порта...... OK\n";
+        arduino->setPortName(arduino_port_name);
         arduino->open(QSerialPort::ReadOnly);
         arduino->setBaudRate(QSerialPort::Baud9600);
         arduino->setDataBits(QSerialPort::Data8);
@@ -72,19 +75,32 @@ Dialog::Dialog(QWidget *parent) :
         QObject::connect(arduino, SIGNAL(readyRead()), this, SLOT(readSerial()));
     } else
     {
-        qDebug() << "Couldn't find the correct port for the arduino.\n";
-        QMessageBox::information(this, "Serial Port Error", "Couldn't open serial port to arduino.");
+        qDebug() << "Не найден корректный порт для Arduino. Проверьте подключение и настройки!\n";
+        QMessageBox::information(this, "Ошибка Serial Port: ", "Couldn't open serial port to arduino.");
     }
+
+    // ----------------------------------------------------------------------------------------
 
 }
 
 Dialog::~Dialog()
 {
     if(arduino->isOpen()){
-        arduino->close(); //    Close the serial port if it's open.
+        arduino->close(); //   Закрыть Serial port, если он открыт.
     }
     delete ui;
 }
+
+/* ----------------------- Чтение и обработка данных по Serial port ----------------------------
+ *
+ *  Алгоритм работы функции:
+ *  1) Построчно читаем данные с Arduino.
+ *  2) Преобразуем полученные данные в строку.
+ *     Входящий пакет имеет структуру: [заголовок,значение].
+ *  3) Парсим входящее сообщение по символу "," - с помощью метода split класса QString,
+ *     таким образом, отделяем заголовок от значения датчика.
+ *  4) В зависимости от полученного заголовка, присваиваем соответствующее значение дачтика.
+ */
 
 void Dialog::readSerial()
 {
@@ -104,6 +120,8 @@ void Dialog::readSerial()
         parsed_humidity = data_split[1];
         serialData.clear();
     }
+
+// ------------------------------------------------------------------------------------------
 
 // ------------------ Запись полученных данных в файл ------------------
 
@@ -126,7 +144,7 @@ void Dialog::readSerial()
 // --------------------------------------------------------------------
 
 // ------------------------ Работа с графиком -------------------------
-
+    // TODO
     QVector<double> temp_array;
     QDataStream stream(serialData);
     stream >> temp_array;
