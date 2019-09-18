@@ -1,0 +1,37 @@
+﻿<Page x:Class="patient_profile.Page2"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:patient_profile"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Page2">
+
+    <Grid>
+        <Label Content="После проведения обучающей тренировки (запись с ладошками) оцените, пожалуйста, своё состояние:" HorizontalAlignment="Left" Margin="38,42,0,0" VerticalAlignment="Top"/>
+        <Button Content="Назад" HorizontalAlignment="Left" Margin="18,397,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Label Content="Усталость" HorizontalAlignment="Left" Margin="30,84,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="sl_answer3" HorizontalAlignment="Left" Margin="24,117,0,0" VerticalAlignment="Top" Width="362" Minimum="0" Maximum="10" Value="0" IsSnapToTickEnabled="True" TickFrequency="1" TickPlacement="BottomRight" ValueChanged="Sl_answer3_ValueChanged"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="107,88,0,0" TextWrapping="Wrap" Text="{Binding ElementName=sl_answer3, Path=Value, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="30"/>
+        <Label Content="Интенсивность кинестетических ощущений в левой руке" HorizontalAlignment="Left" Margin="24,165,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="sl_answer4" HorizontalAlignment="Left" Margin="24,198,0,0" VerticalAlignment="Top" Width="362" Minimum="0" Maximum="10" Value="0" IsSnapToTickEnabled="True" TickFrequency="1" TickPlacement="BottomRight" ValueChanged="Sl_answer4_ValueChanged"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="356,168,0,0" TextWrapping="Wrap" Text="{Binding Value, ElementName=sl_answer4, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="30" RenderTransformOrigin="10.395,0.557"/>
+        <Label Content="Интенсивность кинестетических ощущений в правой руке" HorizontalAlignment="Left" Margin="408,165,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="sl_answer5" HorizontalAlignment="Left" Margin="408,198,0,0" VerticalAlignment="Top" Width="370" Minimum="0" Maximum="10" Value="0" IsSnapToTickEnabled="True" TickFrequency="1" TickPlacement="BottomRight" ValueChanged="Sl_answer5_ValueChanged"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="748,168,0,0" TextWrapping="Wrap" Text="{Binding Value, ElementName=sl_answer5, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="30" RenderTransformOrigin="10.395,0.557"/>
+        <Label Content="Эмоции" HorizontalAlignment="Left" Margin="30,243,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="sl_answer6" HorizontalAlignment="Left" Margin="24,276,0,0" VerticalAlignment="Top" Width="362" Minimum="-3" Maximum="3" Value="0" IsSnapToTickEnabled="True" TickFrequency="1" TickPlacement="BottomRight" ValueChanged="Sl_answer6_ValueChanged"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="100,247,0,0" TextWrapping="Wrap" Text="{Binding Value, ElementName=sl_answer6, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="30"/>
+        <Label Content="Интерес" HorizontalAlignment="Left" Margin="408,244,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="sl_answer7" HorizontalAlignment="Left" Margin="408,277,0,0" VerticalAlignment="Top" Width="370" Minimum="0" Maximum="10" Value="0" IsSnapToTickEnabled="True" TickFrequency="1" TickPlacement="BottomRight" ValueChanged="Sl_answer7_ValueChanged"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="476,246,0,0" TextWrapping="Wrap" Text="{Binding Value, ElementName=sl_answer7, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="30" RenderTransformOrigin="10.395,0.557"/>
+        <Label Content="Сложность воображения движений для левой руки" HorizontalAlignment="Left" Margin="24,320,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="sl_answer8" HorizontalAlignment="Left" Margin="24,353,0,0" VerticalAlignment="Top" Width="362" Minimum="0" Maximum="10" Value="0" IsSnapToTickEnabled="True" TickFrequency="1" TickPlacement="BottomRight" ValueChanged="Sl_answer8_ValueChanged"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="332,323,0,0" TextWrapping="Wrap" Text="{Binding Value, ElementName=sl_answer8, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="30" RenderTransformOrigin="10.395,0.557"/>
+        <Label Content="Сложность воображения движений для правой руки" HorizontalAlignment="Left" Margin="408,320,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="sl_answer9" HorizontalAlignment="Left" Margin="408,353,0,0" VerticalAlignment="Top" Width="370" Minimum="0" Maximum="10" Value="0" IsSnapToTickEnabled="True" TickFrequency="1" TickPlacement="BottomRight" ValueChanged="Sl_answer9_ValueChanged"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="728,323,0,0" TextWrapping="Wrap" Text="{Binding Value, ElementName=sl_answer9, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="30" RenderTransformOrigin="10.395,0.557"/>
+        <Button x:Name="btnNext_p2" Content="Далее" HorizontalAlignment="Left" Margin="703,397,0,0" VerticalAlignment="Top" Width="75" Click="BtnNext_p2_Click"/>
+    </Grid>
+</Page>

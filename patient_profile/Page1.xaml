@@ -1,0 +1,35 @@
+﻿<Page x:Class="patient_profile.Page1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:patient_profile"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Page1">
+
+    <Grid>
+        <Label Content="Вопрос 1" HorizontalAlignment="Left" Margin="31,34,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.427,0.839" FontSize="14" FontWeight="Bold"/>
+        <RadioButton x:Name="cb_answer1_1" Content="Отлично" HorizontalAlignment="Left" Margin="31,110,0,0" VerticalAlignment="Top" Checked="Rb1_Checked"/>
+        <RadioButton x:Name="cb_answer1_2" Content="Хорошо" HorizontalAlignment="Left" Margin="178,110,0,0" VerticalAlignment="Top" Checked="Rb2_Checked"/>
+        <RadioButton x:Name="cb_answer1_3" Content="Удовлетворительно" HorizontalAlignment="Left" Margin="332,110,0,0" VerticalAlignment="Top" Checked="Rb3_Checked"/>
+        <RadioButton x:Name="cb_answer1_4" Content="Плохо" HorizontalAlignment="Left" Margin="525,110,0,0" VerticalAlignment="Top" Checked="Rb4_Checked"/>
+        <Label Content="Вопрос 2" HorizontalAlignment="Left" Margin="31,162,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.427,0.839" FontSize="14" FontWeight="Bold"/>
+        <Label Content="Как себя чувствуете?" HorizontalAlignment="Left" Margin="31,68,0,0" VerticalAlignment="Top"/>
+        <Label Content="Оцените уровень бодрости" HorizontalAlignment="Left" Margin="31,196,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="sl_answer2_1" HorizontalAlignment="Left" Margin="31,245,0,0" VerticalAlignment="Top" Width="522" Minimum="0" Maximum="10" Value="0" IsSnapToTickEnabled="True" TickFrequency="1" TickPlacement="BottomRight" ValueChanged="Sl_answer_ValueChanged"/>
+        <Label Content="0" HorizontalAlignment="Left" Margin="29,272,0,0" VerticalAlignment="Top"/>
+        <Label Content="1" HorizontalAlignment="Left" Margin="80,272,0,0" VerticalAlignment="Top"/>
+        <Label Content="2" HorizontalAlignment="Left" Margin="130,272,0,0" VerticalAlignment="Top"/>
+        <Label Content="3" HorizontalAlignment="Left" Margin="180,272,0,0" VerticalAlignment="Top"/>
+        <Label Content="4" HorizontalAlignment="Left" Margin="232,272,0,0" VerticalAlignment="Top"/>
+        <Label Content="5" HorizontalAlignment="Left" Margin="285,272,0,0" VerticalAlignment="Top"/>
+        <Label Content="6" HorizontalAlignment="Left" Margin="336,272,0,0" VerticalAlignment="Top"/>
+        <Label Content="7" HorizontalAlignment="Left" Margin="386,272,0,0" VerticalAlignment="Top"/>
+        <Label Content="8" HorizontalAlignment="Left" Margin="438,272,0,0" VerticalAlignment="Top"/>
+        <Label Content="9" HorizontalAlignment="Left" Margin="488,272,0,0" VerticalAlignment="Top"/>
+        <Label Content="10" HorizontalAlignment="Left" Margin="538,272,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnNext" Content="Далее" HorizontalAlignment="Left" Margin="703,397,0,0" VerticalAlignment="Top" Width="75" Click="BtnNext_Click"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="198,199,0,0" TextWrapping="Wrap" Text="{Binding ElementName=sl_answer2_1, Path=Value, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="30"/>
+    </Grid>
+</Page>
