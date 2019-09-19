@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 
 namespace patient_profile
 {
@@ -31,9 +32,21 @@ namespace patient_profile
         }
 
     }
+
+    public class item
+    {
+        [XmlAttribute]
+        public int id;
+        [XmlAttribute]
+        public string value;
+
+    }
+
+    [Serializable]
     public static class WorkBase
     {
         // Создание базы ответов на вопросы
         public static Dictionary<int, string> anket_base { get; set; } = new Dictionary<int, string>(100);
     }
+
 }

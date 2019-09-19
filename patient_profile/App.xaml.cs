@@ -13,6 +13,6 @@ namespace patient_profile
     /// </summary>
     public partial class App : Application
     {
-        List<string> answer_base = new List<string>();  // База ответов
+
     }
 }

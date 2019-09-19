@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <item id="0" value="Отлично" />
+  <item id="1" value="8" />
+  <item id="2" value="2" />
+  <item id="3" value="6" />
+  <item id="4" value="9" />
+  <item id="5" value="-2" />
+  <item id="6" value="10" />
+  <item id="7" value="3" />
+  <item id="8" value="2" />
+</items>
